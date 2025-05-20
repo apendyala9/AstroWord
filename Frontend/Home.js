@@ -1,52 +1,58 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Size } from './Size';
 
-export const Home = () => {
+
+
+export const Home = ({navigation}) => {
+
+    // The above is equivalent to this ==> const navigation = props.navigation();
+
 
     return (
     <View style = {styles.container}>
-        <View style = {[styles.block, styles.blocksolarsystem]}>
-            <text style = {styles.text}>
+        <ScrollView>
 
-                Solar System
+            <View style = {[styles.block, styles.blocksolarsystem]}>
+                <Button
+                title="Solar System"
+                onPress={() =>
+                navigation.navigate('Size', {name: 'Solar System'})}/>
+            </View>
 
-            </text>
-        </View>
+            <View style = {[styles.block, styles.blockastrohistory]}>
+                <Button
+                title="Astronomy History"
+                onPress={() =>
+                navigation.navigate('Size', {name: 'Astronomy History'})}/>
+            </View>
 
-        <View style = {[styles.block, styles.blockastrohistory]}>
-            <text style = {styles.text}>
+            
+            <View style = {[styles.block, styles.blockstarsytems]}>
+                
+                <Button
+                title="Star Systems"
+                onPress={() =>
+                navigation.navigate('Size', {name: 'Star Systems'})}/>
 
-                Astronomy History
+            </View>
 
-            </text>
-        </View>
+            
+            <View style = {[styles.block, styles.blockexoplanets]}>
+                <Button
+                title="Exoplanets"
+                onPress={() =>
+                navigation.navigate('Size', {name: 'Exoplanets'})}/>
+            </View>
 
-        
-        <View style = {[styles.block, styles.blockstarsytems]}>
-            <text style = {styles.text}>
-
-                Star Systems
-
-            </text>
-        </View>
-
-        
-        <View style = {[styles.block, styles.blockexoplanets]}>
-            <text style = {styles.text}>
-
-                Exoplanets
-
-            </text>
-        </View>
-
-        
-        <View style = {[styles.block, styles.blockconstellations]}>
-            <text style = {styles.text}>
-
-               Constellations
-
-            </text>
-        </View>
-
+            
+            <View style = {[styles.block, styles.blockconstellations]}>
+                <Button
+                title="Constellations"
+                onPress={() =>
+                navigation.navigate('Size', {name: 'Constellations'})}/>
+            </View>
+        </ScrollView>
     </View>
 
     )
@@ -101,6 +107,12 @@ const styles = StyleSheet.create({
         fontSize: 80,
 
     },
+    title: {
+
+        marginVertical: 8,
+        textAlign: 'center',
+
+    },  
 
 });
 
