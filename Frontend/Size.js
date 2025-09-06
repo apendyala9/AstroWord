@@ -15,6 +15,15 @@ export const Size = ({navigation, route}) => {
             <text>
 
                 Please select the size of the crossword of {subject} 
+                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '5x5'})}>
+                    5x5
+                </Button>
+                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '10x10'})}>
+                    10x10
+                </Button>
+                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '15x15'})}>
+                    15x15
+                </Button>
 
             </text>
 

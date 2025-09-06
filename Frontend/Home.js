@@ -1,5 +1,6 @@
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useContext } from 'react';
 import { Size } from './Size';
 
 
@@ -7,6 +8,8 @@ import { Size } from './Size';
 export const Home = ({navigation}) => {
 
     // The above is equivalent to this ==> const navigation = props.navigation();
+
+    const { name } = useContext();
 
 
     return (
