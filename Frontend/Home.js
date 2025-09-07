@@ -1,16 +1,17 @@
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useContext } from 'react';
+import { useContext, createContext } from 'react';
 import { Size } from './Size';
+import { MainContext } from './context/MainContext';
 
 
+export const topic = createContext();
 
 export const Home = ({navigation}) => {
 
     // The above is equivalent to this ==> const navigation = props.navigation();
 
-    const { name } = useContext();
-
+    const { selectedTopic, setSelectedTopic } = useContext(MainContext);
 
     return (
     <View style = {styles.container}>
@@ -19,15 +20,19 @@ export const Home = ({navigation}) => {
             <View style = {[styles.block, styles.blocksolarsystem]}>
                 <Button
                 title="Solar System"
-                onPress={() =>
-                navigation.navigate('Size', {name: 'Solar System'})}/>
+                onPress={() =>{
+                    setSelectedTopic('Solar System')
+                    navigation.navigate('Size')}
+                }/>
             </View>
 
             <View style = {[styles.block, styles.blockastrohistory]}>
                 <Button
                 title="Astronomy History"
-                onPress={() =>
-                navigation.navigate('Size', {name: 'Astronomy History'})}/>
+                onPress={() =>{
+                    setSelectedTopic('Astronomy History')
+                    navigation.navigate('Size')}
+                }/>
             </View>
 
             
@@ -35,8 +40,10 @@ export const Home = ({navigation}) => {
                 
                 <Button
                 title="Star Systems"
-                onPress={() =>
-                navigation.navigate('Size', {name: 'Star Systems'})}/>
+                onPress={() =>{
+                    setSelectedTopic('Star Systems')
+                    navigation.navigate('Size')}
+                }/>
 
             </View>
 
@@ -44,16 +51,20 @@ export const Home = ({navigation}) => {
             <View style = {[styles.block, styles.blockexoplanets]}>
                 <Button
                 title="Exoplanets"
-                onPress={() =>
-                navigation.navigate('Size', {name: 'Exoplanets'})}/>
+                onPress={() =>{
+                    setSelectedTopic('Exoplanets')
+                    navigation.navigate('Size')}
+                }/>
             </View>
 
             
             <View style = {[styles.block, styles.blockconstellations]}>
                 <Button
                 title="Constellations"
-                onPress={() =>
-                navigation.navigate('Size', {name: 'Constellations'})}/>
+                onPress={() =>{
+                    setSelectedTopic('Constellations')
+                    navigation.navigate('Size')}
+                }/>
             </View>
         </ScrollView>
     </View>

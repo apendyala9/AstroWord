@@ -1,39 +1,32 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-
-
-
+import {MainContext} from './context/MainContext';
+import {useContext} from 'react';
 
 export const Size = ({navigation, route}) => {
-
-    const subject = route.params.name
+    const { selectedTopic, setSelectedTopic } = useContext(MainContext);
 
     return (
 
-        <View>
-            <text>
+        <View style = {styles.container}>
+            <Text>
 
-                Please select the size of the crossword of {subject} 
-                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '5x5'})}>
-                    5x5
-                </Button>
-                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '10x10'})}>
-                    10x10
-                </Button>
-                <Button onPress={() => navigation.navigate('Size', {name: 'Solar System', size: '15x15'})}>
-                    15x15
-                </Button>
+                Please select the size of the crossword  {selectedTopic}
+                <View style = {styles.block}>
+                    <Button onPress={() => navigation.navigate('Crossword', {size: '5x5'})} title = "5x5"/>
+                </View>
 
-            </text>
+                <View style = {styles.block}>
+                    <Button onPress={() => navigation.navigate('Crossword', {size: '10x10'})} title = "10x10"/>
+                </View>
 
+                <View style = {styles.block}>
+                    <Button onPress={() => navigation.navigate('Crossword', {size: '15x15'})} title = "15x15"/>
+                </View>
+            </Text>
 
         </View>
-
-
     )
-
-
 
 }
 
@@ -41,7 +34,19 @@ export const Size = ({navigation, route}) => {
 
 const styles = StyleSheet.create({
 
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    block: {
 
+        width:400,
+        height: 400,
+        borderColor: "Black",
+        borderWidth: 2
 
+    },
 
 })
