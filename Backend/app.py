@@ -21,6 +21,7 @@ def getCrossword():
     if topic == 'Solar System':
         planet = db.execute('SELECT * FROM Planets').fetchall()
         planet = create_setup(planet)
+        print(planet)
         planet = hint_generator(planet)
         print(planet)
 

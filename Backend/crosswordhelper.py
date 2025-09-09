@@ -1,9 +1,7 @@
 import random
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
-from pydantic import BaseModel, Field
-
+from langchain_core.output_parsers import StrOutputParser
 
 
 
@@ -14,12 +12,21 @@ def create_setup(data):
     setup = []
 
     for row in data:
-        ran = random.randint(2, len(row) - 1)
-        while(not row[list(row.keys())[ran]] or row[list(row.keys())[ran]] == ''):
-            ran += 1
-            if (ran == len(row)):
-                ran = 2
-        setup.append({'name': row['name'], 'attr': {list(row.keys())[ran]: row[list(row.keys())[ran]]}})
+        available_attrs = []
+        keys = list(row.keys())
+        
+        for i in range(2, len(keys)):  
+            if row[keys[i]] and str(row[keys[i]]).strip() != '':
+                available_attrs.append((keys[i], row[keys[i]]))
+        
+        # If no valid attributes found, skip this row
+        if not available_attrs:
+            continue
+            
+        # Randomly select one attribute
+        selected_attr, selected_value = random.choice(available_attrs)
+        setup.append({'name': row['name'], 'attr': {selected_attr: selected_value}})
+    
     return setup
 
 
@@ -29,24 +36,27 @@ def hint_generator(dataSet):
 
     llm = OllamaLLM(model="llama3")
 
-    class Output(BaseModel):
-        name: str = Field(description="The name of the data")
-        hint: str = Field(description="The hint for the data")
-
-    parser = JsonOutputParser(pydantic_object=Output)
-
     template = """Given the following data which includes the name of the data and an attribute of the data, 
-        generate a hint for the data that would be suitable for a crossword puzzle. The hint should be related to the attribute of the data. 
-        The hint should not include the name of the data.
+        generate a longer and comprehensive description 
+        - The description should be related to the attribute of the data. 
+        - The description should not include the name of the data.
+        - The description should be an extension of the attribute of the data.
+        - The description should be at most 10 words.
 
-        You must respond with valid JSON only. Do not include any text before or after the JSON.
-        Put the original name in the name field and the generated hint in the hint field.
-
-        {format_instructions}
+        You must respond with a string only. Do not include any text before or after the string.
 
         Name: {name}
         Attribute: {attr}"""
 
     prompt = ChatPromptTemplate.from_template(template)
-    chain = prompt | llm | parser
-    return [chain.invoke({'name': data['name'], 'attr': str(data['attr']), 'format_instructions': parser.get_format_instructions()}) for data in dataSet]
+
+    #Send prompt to LLM and return as a string
+    chain = prompt | llm | StrOutputParser()
+
+
+    return [{'name': data['name'], 'hint': chain.invoke({'name': data['name'], 'attr': str(data['attr'])})} for data in dataSet]
+
+
+
+def crossword_generator(dataSet, size):
+    pass
