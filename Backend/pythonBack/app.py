@@ -2,7 +2,7 @@ from flask import request, jsonify, Flask
 from db_setup import connect_db
 from flask_cors import CORS
 import sqlite3
-from crosswordhelper import create_setup, hint_generator
+from crosswordhelper import crossword_generator, hint_generator, create_setup
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -21,12 +21,10 @@ def getCrossword():
     if topic == 'Solar System':
         planet = db.execute('SELECT * FROM Planets').fetchall()
         planet = create_setup(planet)
-        print(planet)
         planet = hint_generator(planet)
-        print(planet)
+        crossword = crossword_generator(planet, size)
 
 
-    crossword = planet
     return jsonify(crossword)
 
 

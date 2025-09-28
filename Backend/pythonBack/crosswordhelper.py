@@ -1,8 +1,12 @@
 import random
+import csv
+import os
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-
+import subprocess
+import json
+import re
 
 
 
@@ -59,4 +63,28 @@ def hint_generator(dataSet):
 
 
 def crossword_generator(dataSet, size):
-    pass
+
+    with open(f"../crossword_input/words_{15}_{15}_empty.json", "w") as f:
+        json_data = []
+        for data in (dataSet):
+            json_data.append({"clue": data['hint'], "answer": data['name']})
+        json.dump(json_data, f, indent=4)
+        
+
+    result = subprocess.run(["node", "../nodeBack/cross_gen.js"], capture_output=True, text=True, check=True)
+
+    #dotall is used to match the entire string including newlines
+    res_json = re.search(r'\{.*\}', result.stdout, re.DOTALL)
+    json_data = {}
+    if res_json:
+        json_data = json.loads(res_json.group(0))
+
+    if json_data:
+        return json_data
+    else:
+        return {"error": "Error generating crossword"}
+
+    
+
+
+

@@ -4,7 +4,7 @@ import os
 def create_db():
     """Connect to the SQLite database and create tables if they don't exist."""
     try:
-        db_path = 'AstroWord.db'
+        db_path = '../AstroWord.db'
         db = sqlite3.connect(db_path)
         
         # Create Planets table
@@ -62,7 +62,7 @@ def connect_db():
             d[field] = value
         return d
     
-    conn = sqlite3.connect('AstroWord.db')
+    conn = sqlite3.connect('../AstroWord.db')
     # Allows the database to be accessed as a dictionary
     conn.row_factory = dict_factory
     return conn
