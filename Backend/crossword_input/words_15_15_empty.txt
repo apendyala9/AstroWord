@@ -1,8 +1,0 @@
-MERCURY Closest celestial body to the sun's warmth.
-VENUS Second planet from the sun's radiant warmth.
-EARTH Lonely, solitary satellite orbits celestial body majestically.
-MARS Rocky planet's tiny moon orbits closely, perturbs orbit.
-JUPITER Fifth planet from the sun, massive gas giant.
-SATURN Orbiting majestically, a massive moon takes center stage.
-URANUS A gas giant's celestial discovery marked history.
-NEPTUNE Farthest known celestial body discovered by astronomers' combined efforts.

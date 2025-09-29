@@ -1,15 +1,12 @@
 import { Button, View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, createContext } from 'react';
-import { Size } from './Size';
 import { MainContext } from './context/MainContext';
 
 
 export const topic = createContext();
 
 export const Home = ({navigation}) => {
-
-    // The above is equivalent to this ==> const navigation = props.navigation();
 
     const { selectedTopic, setSelectedTopic } = useContext(MainContext);
 
@@ -18,53 +15,61 @@ export const Home = ({navigation}) => {
         <ScrollView>
 
             <View style = {[styles.block, styles.blocksolarsystem]}>
-                <Button
-                title="Solar System"
-                onPress={() =>{
-                    setSelectedTopic('Solar System')
-                    navigation.navigate('Size')}
-                }/>
+                <View style = {styles.buttonContainer}>
+                    <Button
+                    title="Solar System"
+                    onPress={() =>{
+                        setSelectedTopic('Solar System')
+                        navigation.navigate('Crossword')}
+                    }/>
+                </View>
             </View>
 
             <View style = {[styles.block, styles.blockastrohistory]}>
-                <Button
-                title="Astronomy History"
-                onPress={() =>{
-                    setSelectedTopic('Astronomy History')
-                    navigation.navigate('Size')}
-                }/>
+                <View style = {styles.buttonContainer}>
+                    <Button
+                    title="Astronomy History"
+                    onPress={() =>{
+                        setSelectedTopic('Astronomy History')
+                        navigation.navigate('Crossword')}
+                    }/>
+                </View>
             </View>
 
             
             <View style = {[styles.block, styles.blockstarsytems]}>
-                
-                <Button
-                title="Star Systems"
-                onPress={() =>{
-                    setSelectedTopic('Star Systems')
-                    navigation.navigate('Size')}
-                }/>
-
+                <View style = {styles.buttonContainer}>
+                    <Button
+                    title="Star Systems"
+                    onPress={() =>{
+                        setSelectedTopic('Star Systems')
+                        navigation.navigate('Crossword')}
+                    }/>
+                </View>
             </View>
 
             
             <View style = {[styles.block, styles.blockexoplanets]}>
-                <Button
-                title="Exoplanets"
-                onPress={() =>{
-                    setSelectedTopic('Exoplanets')
-                    navigation.navigate('Size')}
-                }/>
+                <View style = {styles.buttonContainer}>
+                    <Button
+                    title="Exoplanets"
+                    onPress={() =>{
+                        setSelectedTopic('Exoplanets')
+                        navigation.navigate('Crossword')}
+                    }/>
+                </View>
             </View>
 
             
             <View style = {[styles.block, styles.blockconstellations]}>
-                <Button
-                title="Constellations"
-                onPress={() =>{
-                    setSelectedTopic('Constellations')
-                    navigation.navigate('Size')}
-                }/>
+                <View style = {styles.buttonContainer}>
+                    <Button
+                    title="Constellations"
+                    onPress={() =>{
+                        setSelectedTopic('Constellations')
+                        navigation.navigate('Crossword')}
+                    }/>
+                </View>
             </View>
         </ScrollView>
     </View>
@@ -88,7 +93,9 @@ const styles = StyleSheet.create({
         width:400,
         height: 400,
         borderColor: "Black",
-        borderWidth: 2
+        borderWidth: 2,
+        padding: 10,
+        margin: 10,
 
     },
     blocksolarsystem: {
@@ -126,7 +133,10 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         textAlign: 'center',
 
-    },  
+    },
+    buttonContainer: {
+        flex: 1,
+    }  
 
 });
 

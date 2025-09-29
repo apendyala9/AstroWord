@@ -14,15 +14,15 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 def getCrossword():
     data = request.get_json()
     topic = data['topic']
-    size = data['size']
 
+    #Basic testing to make sure crossword is generated
     db = connect_db()
     crossword = []
     if topic == 'Solar System':
         planet = db.execute('SELECT * FROM Planets').fetchall()
         planet = create_setup(planet)
         planet = hint_generator(planet)
-        crossword = crossword_generator(planet, size)
+        crossword = crossword_generator(planet)
 
 
     return jsonify(crossword)

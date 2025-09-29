@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './Home';
-import { Size } from './Size';
 import { Crossword } from './Crossword';
 import { MainContextProvider } from './context/MainContext';
 
@@ -19,10 +18,6 @@ export default function App() {
           <Stack.Screen
             name = "Home"
             component={Home}
-          />
-          <Stack.Screen
-            name = "Size"
-            component={Size}
           />
           <Stack.Screen
             name = "Crossword"
