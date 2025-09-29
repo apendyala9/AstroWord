@@ -1,10 +1,10 @@
 # AstroWord
 
-* A Crossword app that's centered around astronomy!
+A Crossword app that's centered around astronomy!
 
 ## Frontend
 
-React Native for the Frontend
+* React Native for the Frontend
 
 ## Backend
 
